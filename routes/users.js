@@ -10,7 +10,9 @@ const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken');
 
-const key = require('../k8s/keys')
+const { secretOrKey } = require('../config');
+
+const key = secretOrKey;
 
 router.get('/', (req, res) => {
     User.find({})

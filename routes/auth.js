@@ -10,7 +10,9 @@ const passport = require('passport');
 
 const bcrypt = require('bcrypt');
 
-const key = require('../k8s/keys')
+const { secretOrKey } = require('../config');
+
+const key = secretOrKey;
 
 
 
