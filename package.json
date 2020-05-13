@@ -7,7 +7,7 @@
     "test": "npm run test",
     "server": "nodemon server.js",
     "local": "nodemon -r dotenv/config server.js",
-    "start": "nodemon -r dotenv/config server.js"
+    "start": "node -r dotenv/config server.js"
   },
   "keywords": [
     "server",
