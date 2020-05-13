@@ -7,7 +7,10 @@
     "test": "npm run test",
     "server": "nodemon server.js",
     "local": "nodemon -r dotenv/config server.js",
-    "start": "node -r dotenv/config server.js"
+    "start": "node -r dotenv/config server.js -p 4040"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "keywords": [
     "server",
