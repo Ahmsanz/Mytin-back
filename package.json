@@ -1,0 +1,32 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "server for the REACT app Mytin2, mainly using NodeJS and ExpressJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run test",
+    "server": "nodemon server.js",
+    "local": "nodemon -r dotenv/config server.js"
+  },
+  "keywords": [
+    "server",
+    "react",
+    "node",
+    "express",
+    "mytin"
+  ],
+  "author": "Ahmsanz",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.4",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
+  }
+}
