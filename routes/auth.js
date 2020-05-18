@@ -16,12 +16,6 @@ const key = secretOrKey;
 
 
 
-// router.get('/login', passport.authenticate('jwt', {session: false}), (req, res) => {
-//     User.findOne({_id: req.user._id})
-//     .then( user => res.json(user))
-//     .catch(err => res.status(400).json({error: 'You shall not pass! Identify yourself'}))
-// })
-
 router.post('/login/', (req,res) => {
     const {mail, password} = req.body;
 
@@ -61,8 +55,7 @@ router.get('/google',
 ));
 
 router.get( '/google/callback', passport.authenticate('google'), (req, res) =>  {   
-        console.log('this is the request', req)     
-        User.findOne({mail: req.mail})        
+        User.findOne({_id: req.user._id})        
         .then(user => {            
             console.log('user found in auth', user)
             jwt.sign (
@@ -71,25 +64,14 @@ router.get( '/google/callback', passport.authenticate('google'), (req, res) =>  
                 key,
                 {expiresIn: 3600},
                 (err, token) => {
-                    console.log('token', token)
-                    if (err) throw err;  
-                    
-                    res.redirect(200, `http://localhost:3000/profile?token=${token}`)
+                    if (err) throw err;                     
+                    res.redirect(200, `http://localhost:3000/profile/&user=${user.mail}&token=${token}`)
                 }
             )
         })
   
     }
 );
-
-// router.get('/google/callback', 
-//   passport.authenticate('google', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('http://localhost:3000/profile');
-//   });
-
-
 
 
 module.exports = router;
