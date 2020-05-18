@@ -32,11 +32,12 @@ mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTo
 
 app.listen(port, () => console.log('listening to ' + port));
 
-// app.use(passport.initialize())
-// app.use(passport.session())
-// require('./routes/passport')
+app.use(passport.initialize())
+app.use(passport.session())
+require('./strategies/google')
 
 app.use('/cities', require('./routes/cities'));
 app.use('/users', require('./routes/users'));
 app.use('/auth', require('./routes/auth'));
 app.use('/itineraries', require('./routes/itineraries'))
+app.use('/plans', require('./routes/plans'));

@@ -14,7 +14,7 @@ const commentSchema = new mongoose.Schema({
     type: String
   },
   date: {
-    type: Date
+    type: String
   },
   itinId: {
     type: String
