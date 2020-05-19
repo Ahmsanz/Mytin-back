@@ -39,11 +39,11 @@ router.get('/city/:city',
         .catch(err => console.log(err));
 });
 
-router.get('/itinerary/:nest',
+router.get('/itinerary/:itinerary',
 (req, res) => {
-      let {nest} = req.params;
-      console.log(nest)
-      Plan.find({itinerary: nest})
+      let {itinerary} = req.params;
+      console.log(itinerary)
+      Plan.find({itinerary})
         .then(plans => {console.log('these are the plans', plans); res.send(plans)})
         .catch(err => console.log('nope', err));
 });
