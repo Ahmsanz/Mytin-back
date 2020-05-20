@@ -4,7 +4,9 @@ const router = express.Router();
 
 const User = require('../models/usersModel')
 
-const Comment = require('../models/commentsModel')
+const Comment = require('../models/commentsModel');
+
+const Message = require('../models/messagesModel')
 
 const bcrypt = require('bcrypt');
 
@@ -105,6 +107,22 @@ router.post('/register', (req, res) => {
         })
     })
 
+})
+
+router.post('/message/send', (req, res) => {
+  const { userId, userMail, userFirstName, userLastName, date, message } = req.body;
+
+  new Message({
+    userId,
+    userMail, 
+    userFirstName,
+    userLastName,
+    date,
+    message
+  }).save()
+  
+  console.log('new message received', res.body);
+  res.status(200).json({msg: 'new message correctly recieved'})
 })
 
 module.exports = router;

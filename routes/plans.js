@@ -33,7 +33,6 @@ router.get('/all',
 router.get('/city/:city',
 (req, res) => {   
       let {city} = req.params;
-      console.log(city)
       Plan.find({city})
         .then(plans => {res.send(plans)})
         .catch(err => console.log(err));
@@ -42,7 +41,6 @@ router.get('/city/:city',
 router.get('/itinerary/:nest',
 (req, res) => {
       let {nest} = req.params;
-      console.log(itinerary)
       Plan.find({itinerary: nest})
         .then(plans => {console.log('these are the plans', plans); res.send(plans)})
         .catch(err => console.log('nope', err));
