@@ -16,6 +16,19 @@ const { secretOrKey } = require('../config');
 
 const key = secretOrKey;
 
+
+/**
+   * @api {get} /users/
+   * @apiDescription retrieves all the users in the database
+   * @apiVersion 1.0.0
+   * @apiName get users
+   * @apiGroup users
+   *
+   * @apiParam  none
+   *
+   * @apiSuccess {Array} users documents
+   *
+   */
 router.get('/', (req, res) => {
     User.find({})
     .then( users => {
@@ -24,6 +37,19 @@ router.get('/', (req, res) => {
     .catch( err => console.log(err))
 })
 
+
+/**
+   * @api {put} /users/favs/add/:userId
+   * @apiDescription adds an itinerary to the user's document after setting it as favourite in the front
+   * @apiVersion 1.0.0
+   * @apiName add favourite
+   * @apiGroup users
+   *
+   * @apiParam  {string} user id
+   *
+   * @apiSuccess itinerary id added as favourite in user's favourites array
+   *
+   */
 router.put('/favs/add/:userId', (req, res) => {
 
   let { userId } = req.params;
@@ -37,6 +63,19 @@ router.put('/favs/add/:userId', (req, res) => {
   .catch( err => {console.log('something went wrong', err); res.status(500).json("we coudn't add that favourite")})
 })
 
+
+/**
+   * @api {put} /users/favs/remove/:userId
+   * @apiDescription deletes an itinerary from favourites array
+   * @apiVersion 1.0.0
+   * @apiName unfavourite itinerary
+   * @apiGroup users
+   *
+   * @apiParam  {String} user id
+   *
+   * @apiSuccess itinerary id is removed from favourites array
+   *
+   */
 router.put('/favs/remove/:userId', (req, res) => {
   let { userId } = req.params;
   let fav  = req.body.id;
@@ -47,6 +86,19 @@ router.put('/favs/remove/:userId', (req, res) => {
   .catch( err => {console.log('something went wrong', err); res.status(500).json("we coudn't remove that favourite")})
 })
 
+
+/**
+   * @api {get} /users/:userId/favs/
+   * @apiDescription retrieves all the user's favourites
+   * @apiVersion 1.0.0
+   * @apiName get user's favourites
+   * @apiGroup users
+   *
+   * @apiParam  {String} user id
+   *
+   * @apiSuccess {Array} user's favourites
+   *
+   */
 router.get('/:userId/favs/', (req, res) => {
   let {userId} = req.params;
   User.findOne({_id: userId})
@@ -54,6 +106,19 @@ router.get('/:userId/favs/', (req, res) => {
   .catch( err => res.status(400).json({msg: 'something went wrong retrieving the favourites'}))
 })
 
+
+/**
+   * @api {get} /users/:userId/comments
+   * @apiDescription retrieves all the user's comments
+   * @apiVersion 1.0.0
+   * @apiName get user's comments
+   * @apiGroup users
+   *
+   * @apiParam  {String} user id
+   *
+   * @apiSuccess {Array} user's comments
+   *
+   */
 router.get('/:userId/comments/', (req, res) => {
   let {userId} = req.params;
   Comment.find({userId})
@@ -61,6 +126,19 @@ router.get('/:userId/comments/', (req, res) => {
   .catch( err => res.status(400).json({msg: 'something went wrong with the user comments'}))
 })
 
+
+/**
+   * @api {post} /users/register
+   * @apiDescription adds new user to database
+   * @apiVersion 1.0.0
+   * @apiName post user
+   * @apiGroup users
+   *
+   * @apiBodyRequest nee user document body
+   *
+   * @apiSuccess new user's document created in the database
+   *
+   */
 router.post('/register', (req, res) => {
 
     let user = req.body.data;
@@ -109,6 +187,19 @@ router.post('/register', (req, res) => {
 
 })
 
+
+/**
+   * @api {post} /users/message/send
+   * @apiDescription post a message from the user in the contact component
+   * @apiVersion 1.0.0
+   * @apiName post message
+   * @apiGroup users
+   *
+   * @apiBodyRequest all the user's data and the message's body
+   *
+   * @apiSuccess message correctly added to database
+   *
+   */
 router.post('/message/send', (req, res) => {
   const { userId, userMail, userFirstName, userLastName, date, message } = req.body;
 

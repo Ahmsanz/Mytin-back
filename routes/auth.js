@@ -16,6 +16,18 @@ const key = secretOrKey;
 
 
 
+/**
+   * @api {post} /auth/login/
+   * @apiDescription loggs an user 
+   * @apiVersion 1.0.0
+   * @apiName log in
+   * @apiGroup auth
+   *
+   * @apiRequestBody  {String} mail and password from form 
+   *
+   * @apiSuccess {} user is logged in the app
+   *
+   */
 router.post('/login/', (req,res) => {
     const {mail, password} = req.body;
 
@@ -50,10 +62,36 @@ router.post('/login/', (req,res) => {
         
 })
 
+
+/**
+   * @api {get} /auth/google
+   * @apiDescription authentication using passport's google strategy
+   * @apiVersion 1.0.0
+   * @apiName auth with google
+   * @apiGroup auth
+   *
+   * @apiParam  none
+   *
+   * @apiSuccess google auth screen appears
+   *
+   */
 router.get('/google',
   passport.authenticate('google', { scope: [ 'email', 'profile'] }
 ));
 
+
+/**
+   * @api {get} /auth/google/callback
+   * @apiDescription loggs the user in the app with the Google data
+   * @apiVersion 1.0.0
+   * @apiName google callback 
+   * @apiGroup auth
+   *
+   * @apiParam  none
+   *
+   * @apiSuccess user is logged with Google account
+   *
+   */
 router.get( '/google/callback', passport.authenticate('google'), (req, res) =>  {   
         User.findOne({_id: req.user._id})        
         .then(user => {            
